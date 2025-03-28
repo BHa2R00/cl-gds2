@@ -132,12 +132,13 @@
   propattr propvalue)
 (defstruct path     
   layer 
-  strans angle xy width 
-  datatype pathtype 
+  xy width 
+  (datatype (make-datatype :i 0))
+  (pathtype (make-pathtype :i 0))
   propattr propvalue)
 (defstruct boundary 
   layer 
-  strans angle xy       
+  xy       
   (datatype (make-datatype :i 0))
   propattr propvalue)
 (defstruct timestamp 
@@ -256,8 +257,6 @@
               (endel-p e)))
            (cond
              ((layer-p e) (setf (boundary-layer r) e))
-             ((strans-p e) (setf (boundary-strans r) e))
-             ((angle-p e) (setf (boundary-angle r) e))
              ((xy-p e) (setf (boundary-xy r) e))
              ((datatype-p e) (setf (boundary-datatype r) e))
              ((propattr-p e) (setf (boundary-propattr r) e))
@@ -272,8 +271,6 @@
               (endel-p e)))
            (cond
              ((layer-p e) (setf (path-layer r) e))
-             ((strans-p e) (setf (path-strans r) e))
-             ((angle-p e) (setf (path-angle r) e))
              ((xy-p e) (setf (path-xy r) e))
              ((width-p e) (setf (path-width r) e))
              ((datatype-p e) (setf (path-datatype r) e))
@@ -454,8 +451,6 @@
        (wt-ux s 2 (+ 4 bsz))
        (wt-ux s 2 #x0800)
        (if (boundary-layer r) (wtgdsrec s (boundary-layer r)))
-       (if (boundary-strans r) (wtgdsrec s (boundary-strans r)))
-       (if (boundary-angle r) (wtgdsrec s (boundary-angle r)))
        (if (boundary-datatype r) (wtgdsrec s (boundary-datatype r)))
        (if (boundary-xy r) (wtgdsrec s (boundary-xy r)))
        (if (boundary-propattr r) (wtgdsrec s (boundary-propattr r)))
@@ -467,8 +462,6 @@
        (wt-ux s 2 (+ 4 bsz))
        (wt-ux s 2 #x0900)
        (if (path-layer r) (wtgdsrec s (path-layer r)))
-       (if (path-strans r) (wtgdsrec s (path-strans r)))
-       (if (path-angle r) (wtgdsrec s (path-angle r)))
        (if (path-datatype r) (wtgdsrec s (path-datatype r)))
        (if (path-pathtype r) (wtgdsrec s (path-pathtype r)))
        (if (path-width r) (wtgdsrec s (path-width r)))
