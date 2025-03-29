@@ -4,6 +4,12 @@
   (:export
     read-gds
     write-gds
+    sub-xy
+    append-xy
+    chop-xy
+    move-xy
+    scale-xy
+    rotate-xy
     ))
 (defun rd-ux (s x end)
   (if (< x 2)
